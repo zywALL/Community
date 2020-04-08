@@ -26,7 +26,7 @@ public class OAuthController {
         try{
             String accessToken = githubProvider.getAccessToken(accessTokenDTO);
             GithubUser githubUser = githubProvider.getUser(accessToken);
-            model.addAttribute("username", githubUser.getName());
+            model.addAttribute("username", githubUser.getLogin());
         }
         catch (IOException e){
             return "error";
