@@ -2,6 +2,8 @@ package com.example.demo.controllor;
 
 import com.example.demo.dto.AccessTokenDTO;
 import com.example.demo.dto.GithubUser;
+import com.example.demo.mapper.UserMapper;
+import com.example.demo.model.User;
 import com.example.demo.provider.GithubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 public class OAuthController {
     @Autowired
     private GithubProvider githubProvider;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Value("${github.client.id}")
     private String clientId;
@@ -35,6 +41,13 @@ public class OAuthController {
             String accessToken = githubProvider.getAccessToken(accessTokenDTO);
             GithubUser githubUser = githubProvider.getUser(accessToken);
             if(githubUser != null){
+                User user = new User();
+                user.setAccount_id(String.valueOf(githubUser.getId()));
+                user.setName(githubUser.getLogin());
+                user.setToken(UUID.randomUUID().toString());
+                user.setGmt_create(System.currentTimeMillis());
+                user.setGmt_modified(user.getGmt_create());
+                userMapper.insert(user);
                 request.getSession().setAttribute("githubUser", githubUser);
             }
             //model.addAttribute("username", githubUser.getLogin());
