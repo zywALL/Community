@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Community" uuid="ae0f9492-7248-4885-8b21-56c4cfb3a22c">
-      <driver-ref>h2.unified</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:~/Community</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="Community_mysql" uuid="a4d17c48-cbce-4633-89f7-4a9d1e4cc2b7">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/Community</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3307/Community</jdbc-url>
     </data-source>
   </component>
 </project>
