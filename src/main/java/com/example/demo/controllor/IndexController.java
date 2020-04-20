@@ -3,6 +3,7 @@ package com.example.demo.controllor;
 import com.example.demo.dto.PagenationDTO;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
+import com.example.demo.service.QuestionPublishService;
 import com.example.demo.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +20,20 @@ public class IndexController {
     private QuestionService questionService;
 
     @Autowired
+    private QuestionPublishService questionPublishService;
+
+
+    @Autowired
     private UserMapper userMapper;
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
-                        Model model,
+                        Model model1,
+                        Model model2,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "3") Integer size){
+                        @RequestParam(name = "size", defaultValue = "3") Integer size,
+                        @RequestParam(name = "pagePublish", defaultValue = "1") Integer pagePublish,
+                        @RequestParam(name = "sizePublish", defaultValue = "3") Integer sizePublish){
         if(request.getCookies() != null){
             Cookie[] cookies = request.getCookies();
             if (cookies.length == 0)return "index";
@@ -42,7 +50,12 @@ public class IndexController {
         }
 
         PagenationDTO pagenationDTO = questionService.list(page, size);
-        model.addAttribute("pagenation", pagenationDTO);
+        model1.addAttribute("pagenation", pagenationDTO);
+
+        PagenationDTO pagenationPublishDTO = questionPublishService.list(pagePublish, sizePublish);
+        model2.addAttribute("pagenationPublish", pagenationPublishDTO);
+
+
         return "index";
     }
 }

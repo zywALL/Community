@@ -25,6 +25,65 @@
                         <h3 class="panel-title">寻找领养人</h3>
                     </div>
                     <div class="panel-body">
+                        <div class="media" th:each="questionPublish : ${pagenation.questionPublishes}">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object img-circle"
+                                         th:src="${questionPublish.user.avatar_url}">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading" th:text="${questionPublish.title}"></h4>
+                                <span th:text="${questionPublish.description}"></span><br>
+                                <span class="text-desc">点赞数:<span th:text="${questionPublish.comment_count}"></span> - 浏览数:<span th:text="${questionPublish.view_count}"></span> - <span th:text="${#dates.format(questionPublish.gmt_create, 'dd MMMM yyyy')}"></span></span>
+
+                            </div>
+                        </div>
+
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li th:if="${pagenationPublish.showFirstPage}">
+                                    <a href="/?pagePublish=1" aria-label="Previous">
+                                        <span aria-hidden="true">&lt;&lt;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${pagenationPublish.showPrevious}">
+                                    <a th:href="@{/(pagePublish=${pagenationPublish.page - 1})}" aria-label="Previous">
+                                        <span aria-hidden="true">&lt;</span>
+                                    </a>
+                                </li>
+                                <li th:each="page : ${pagenationPublish.pages}" th:class="${pagenationPublish.page == page} ? 'active' : '' ">
+                                    <a th:href="@{/(pagePublish=${page})}" th:text="${page}" ></a>
+                                </li>
+                                <li th:if="${pagenationPublish.showNext}">
+                                    <a th:href="@{/(pagePublish=${pagenationPublish.page + 1})}" aria-label="Next">
+                                        <span aria-hidden="true">&gt;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${pagenationPublish.showEndPage}">
+                                    <a th:href="@{/(pagePublish=${pagenationPublish.totalPage})}" aria-label="Next">
+                                        <span aria-hidden="true">&gt;&gt;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">领养小猫咪</h3>
+                    </div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">猫咪二三事</h3>
+                    </div>
+                    <div class="panel-body">
                         <div class="media" th:each="question : ${pagenation.questions}">
                             <div class="media-left">
                                 <a href="#">
@@ -69,26 +128,6 @@
                         </nav>
                     </div>
                 </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">领养小猫咪</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">猫咪二三事</h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
-                </div>
-
-
 
 
             </div>

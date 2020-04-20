@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface QuestionMapper {
     @Insert("INSERT INTO QUESTION (title, description, gmt_create, gmt_modified, creator, tag)\n" + "VALUES\n" + "(#{title}, #{description}, #{gmt_create}, #{gmt_modified}, #{creator}, #{tag});")
-    public void insert(Question question);
+    void insert(Question question);
 
     @Select("SELECT * FROM QUESTION LIMIT #{offset}, #{size};" )
     List<Question> list(@Param(value = "offset") Integer offset, @Param(value = "size")Integer size);

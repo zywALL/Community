@@ -1,10 +1,14 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.QuestionPublish;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagenationDTO<T> {
+public class PagenationDTO {
     private List<QuestionDTO> questions;
+    private List<QuestionPublishDTO> questionPublishes;
+
     private boolean showPrevious;
     private boolean showFirstPage;
     private boolean showNext;
@@ -15,7 +19,7 @@ public class PagenationDTO<T> {
 
 
     public void setPagenation(Integer totalcount, Integer page) {
-        if(totalcount % 3 == 0)totalPage = totalcount/5;
+        if(totalcount % 3 == 0)totalPage = totalcount/3;
         else totalPage = totalcount/3 + 1;
         this.page = page;
 
@@ -67,6 +71,14 @@ public class PagenationDTO<T> {
 
     public void setQuestions(List<QuestionDTO> questions) {
         this.questions = questions;
+    }
+
+    public List<QuestionPublishDTO> getQuestionPublishes() {
+        return questionPublishes;
+    }
+
+    public void setQuestionPublishes(List<QuestionPublishDTO> questionPublishes) {
+        this.questionPublishes = questionPublishes;
     }
 
     public boolean isShowPrevious() {
@@ -124,8 +136,4 @@ public class PagenationDTO<T> {
     public void setTotalPage(Integer totalPage) {
         this.totalPage = totalPage;
     }
-
-
-
-
 }
