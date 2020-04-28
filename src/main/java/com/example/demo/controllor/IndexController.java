@@ -28,8 +28,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
-                        Model model1,
-                        Model model2,
+                        Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
                         @RequestParam(name = "size", defaultValue = "3") Integer size,
                         @RequestParam(name = "pagePublish", defaultValue = "1") Integer pagePublish,
@@ -50,10 +49,10 @@ public class IndexController {
         }
 
         PagenationDTO pagenationDTO = questionService.list(page, size);
-        model1.addAttribute("pagenation", pagenationDTO);
+        model.addAttribute("pagenation", pagenationDTO);
 
         PagenationDTO pagenationPublishDTO = questionPublishService.list(pagePublish, sizePublish);
-        model2.addAttribute("pagenationPublish", pagenationPublishDTO);
+        model.addAttribute("pagenationPublish", pagenationPublishDTO);
 
 
         return "index";
